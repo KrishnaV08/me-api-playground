@@ -1,0 +1,48 @@
+{
+  "name": "Krishna Verma",
+  "email": "iamkrishnaV@gmail.com",
+  "education": "B.Tech in Information Technology, Dr. A.P.J. Abdul Kalam Technical University (2021-2025)",
+  "title": "Full Stack Developer | Flutter Developer",
+  "description": "Passionate developer with experience in frontend, backend, and mobile app development. Solved 200+ DSA problems on LeetCode. Currently working as Flutter Developer Intern at App Knit. Football team player with leadership experience.",
+  "links": {
+    "github": "https://github.com/krishnaV08",
+    "linkedin": "https://www.linkedin.com/in/krishna-verma-1738291ab/",
+    "portfolio": "https://portfolio-krishna-chi.vercel.app"
+  },
+  "skills": [
+    "Java",
+    "Dart",
+    "C",
+    "HTML/CSS",
+    "JavaScript",
+    "React.js",
+    "Flutter",
+    "Next.js",
+    "Tailwind CSS",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "REST API",
+    "Git",
+    "Android Studio",
+    "Postman",
+    "Vercel"
+  ],
+  "projects": [
+    {
+      "name": "Weather App",
+      "description": "Feature-rich Flutter Weather App with real-time current and forecast weather data using WeatherAPI",
+      "link": "https://github.com/KrishnaV08/Weather-APP"
+    },
+    {
+      "name": "Sorting Visualizer",
+      "description": "Interactive web application to visualize over 4 sorting algorithms in real-time with adjustable controls",
+      "link": "https://github.com/KrishnaV08/Sorting-Visualiser"
+    },
+    {
+      "name": "Blog Website",
+      "description": "Backend-driven blog platform with secure user authentication, RESTful APIs, and MongoDB integration",
+      "link": "https://github.com/KrishnaV08/BlogWebsite"
+    }
+  ]
+}

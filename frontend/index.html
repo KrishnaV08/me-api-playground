@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me-API Playground</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Me-API Playground</h1>
+            <p>Your Personal API Dashboard</p>
+        </header>
+
+        <!-- Display Profile -->
+        <section class="profile-section">
+            <h2>Profile</h2>
+            <div id="profileDisplay" class="profile-display">
+                <button onclick="loadProfile()">Load Profile</button>
+            </div>
+        </section>
+
+        <!-- Search Skills -->
+        <section class="search-section">
+            <h2>Search Skills</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search skills (e.g., 'node', 'mongo')">
+                <button onclick="searchSkills()">Search</button>
+            </div>
+            <div id="searchResults"></div>
+        </section>
+
+        <!-- View Projects -->
+        <section class="projects-section">
+            <h2>Projects</h2>
+            <div id="projectsList"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
