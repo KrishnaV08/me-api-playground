@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const Profile = require('./models/Profile');
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const Profile = require("./models/Profile");
 
 const app = express();
 
@@ -11,19 +11,20 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Routes
 
 // Health check
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'API is running' });
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK", message: "API is running" });
 });
 
 // Create/Update Profile (POST)
-app.post('/profile', async (req, res) => {
+app.post("/profile", async (req, res) => {
   try {
     // Delete existing profile and create new one
     await Profile.deleteMany({});
@@ -36,38 +37,52 @@ app.post('/profile', async (req, res) => {
 });
 
 // Search projects by skill (GET)
-app.get('/projects', async (req, res) => {
+app.get("/projects", async (req, res) => {
   try {
     const { skill } = req.query;
     const profile = await Profile.findOne();
-    
+
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' });
+      return res.status(404).json({ message: "Profile not found" });
     }
-    
+
     if (!skill) {
       return res.json(profile.projects);
     }
-    
+
     // Filter projects that might mention the skill
-    const filteredProjects = profile.projects.filter(project => 
-      project.description.toLowerCase().includes(skill.toLowerCase()) ||
-      project.name.toLowerCase().includes(skill.toLowerCase())
+    const filteredProjects = profile.projects.filter(
+      (project) =>
+        project.description.toLowerCase().includes(skill.toLowerCase()) ||
+        project.name.toLowerCase().includes(skill.toLowerCase()),
     );
-    
+
     res.json(filteredProjects);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
+// Welcome route
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to Me-API Playground",
+    endpoints: {
+      health: "/health",
+      profile: "/profile",
+      skillsSearch: "/skills/search?q=keyword",
+      projects: "/projects",
+      projectsSearch: "/projects?skill=keyword",
+    },
+  });
+});
 
 // Get Profile (GET)
-app.get('/profile', async (req, res) => {
+app.get("/profile", async (req, res) => {
   try {
     const profile = await Profile.findOne();
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' });
+      return res.status(404).json({ message: "Profile not found" });
     }
     res.json(profile);
   } catch (error) {
@@ -76,11 +91,11 @@ app.get('/profile', async (req, res) => {
 });
 
 // Update Profile (PUT)
-app.put('/profile', async (req, res) => {
+app.put("/profile", async (req, res) => {
   try {
     const profile = await Profile.findOne();
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' });
+      return res.status(404).json({ message: "Profile not found" });
     }
     Object.assign(profile, req.body);
     await profile.save();
@@ -91,23 +106,23 @@ app.put('/profile', async (req, res) => {
 });
 
 // Search skills (GET)
-app.get('/skills/search', async (req, res) => {
+app.get("/skills/search", async (req, res) => {
   try {
     const { q } = req.query;
     const profile = await Profile.findOne();
-    
+
     if (!profile) {
-      return res.status(404).json({ message: 'Profile not found' });
+      return res.status(404).json({ message: "Profile not found" });
     }
-    
+
     if (!q) {
       return res.json(profile.skills);
     }
-    
-    const filteredSkills = profile.skills.filter(skill => 
-      skill.toLowerCase().includes(q.toLowerCase())
+
+    const filteredSkills = profile.skills.filter((skill) =>
+      skill.toLowerCase().includes(q.toLowerCase()),
     );
-    
+
     res.json(filteredSkills);
   } catch (error) {
     res.status(500).json({ error: error.message });
